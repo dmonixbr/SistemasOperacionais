@@ -1,0 +1,37 @@
+RELATÓRIO
+
+1. Termo de compromisso
+
+Os membros do grupo afirmam que todo o código desenvolvido para este
+trabalho é de autoria própria.  Exceto pelo material listado no item 3
+deste relatório, os membros do grupo afirmam não ter copiado
+material da Internet nem obtiveram código de terceiros.
+
+2. Membros do grupo e alocação de esforço
+
+Victor Vieira de Melo <victor.melo@ufmg.br> 100%
+
+3. Referências bibliográficas
+
+https://www.geeksforgeeks.org/chdir-in-c-language-with-examples/
+https://www.geeksforgeeks.org/exec-family-of-functions-in-c/
+https://www.geeksforgeeks.org/dup-dup2-linux-system-call/
+https://www.geeksforgeeks.org/pipe-system-call/
+https://www.geeksforgeeks.org/fork-system-call/
+https://www.geeksforgeeks.org/wait-system-call-c/
+https://www.geeksforgeeks.org/c-program-demonstrate-fork-and-pipe/
+
+
+4. Estruturas de dados
+
+Tarefa 1:
+O if apresentado na tarefa checa se a entrada do shell é um "cd". No segundo if é executado o comando chdir, que muda o diretorio atual do shell caso o diretório não seja válido. A função chdir retorna -1 e então joga um erro na tela pela saída padrão.
+
+Tarefa 2:
+A tarefa 2 diz respeito a execução dos comandos que são passados para o shell, para este fim é utilizada  a função execvp, que recebe como parametro uma string que é o nome do arquivo que sera executado, o segundo parametro é um apontador que aponta para a lista de parametros disponíveis para o novo processe que será executado.
+
+Tarefa 3
+Nessa tarefa temos como objetivo implementar o comandos redirecionados. Para tal, foi utilizada a função dup2, que recebe como parametro uma função open, que abre um arquivo e da a lista de descritores para a função dup2, que faz uma copia desses descritores e redireciona as informações passadas de um processo ao outro.
+
+Tarefa 4
+A tarefa 4 consiste da implementação de um pipe. Para tal, utilizamos um vetor p que tem 2 posições e chamamos a função pipe para ele, logo após fazemos um fork do processo que queremos realizar o pipe, dessa forma criamos um processo filho. Na execução do processo filho, chamamos uma função de espera (wait) para que o processo pai aguarde a execução do processo filho, dechamos então o arquivo de leitura do pipe (p[0]), logo após criamos uma cópia do descritor de escrita (p[1]) e o redireciona para a saída padrão e assim é executado o comando da esquerda enquanto, no processo pai, que executa após o fim do processo filho por conta do wait, fechamos o descritor de escrita (p[1]) e duplicamos o descritor de leitura (p[0]) que é redirecionada ao descritor da entrada padrão, executando, então o comando da direita.
